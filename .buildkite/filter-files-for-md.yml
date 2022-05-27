@@ -7,7 +7,7 @@ steps:
       - exit_status: '*'
 
   - label: 'Run pr-validation only if filter check is passed'
-  - command: |
+    command: |
       if [ $$(buildkite-agent step get "outcome" --step "filter-pr") == "passed" ]; then
          cat <<- YAML | buildkite-agent pipeline upload
          steps:
