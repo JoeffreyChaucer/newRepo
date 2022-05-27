@@ -1,8 +1,9 @@
 steps:
   - label: '🔨 Check for MD file'
-    command: filter-md-script.sh
+    command: .buildkite/filter-md-script.sh
     key: filter-md-script
+
   - label: ':pipeline:'
-    command: trigger-pr-pipeline-script.sh
+    command: .buildkite/trigger-pr-pipeline-script.sh
     depends_on: filter-md-script
     allow_dependency_failure: true
