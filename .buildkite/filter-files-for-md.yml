@@ -3,6 +3,8 @@ steps:
     command: .buildkite/filter-md-script.sh
     key: filter-md-script
     if: build.pull_request.base_branch == "main"
+    soft_fail:
+      - exit_status: 1
 
   - label: ':pipeline:'
     command: .buildkite/trigger-pr-pipeline-script.sh
