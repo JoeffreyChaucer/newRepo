@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-result="$(buildkite-agent step get outcome --step filter-md-script)"
+result="$(buildkite-agent step get outcome --step filter)"
 
 buildkite-agent pipeline upload <<YAML
 steps:
