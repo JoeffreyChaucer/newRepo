@@ -2,6 +2,7 @@ steps:
   - label: '🔨 Check for MD file'
     command: .buildkite/filter-md-script.sh
     key: filter-md-script
+    if: build.pull_request.base_branch == "main"
 
   - label: ':pipeline:'
     command: .buildkite/trigger-pr-pipeline-script.sh
