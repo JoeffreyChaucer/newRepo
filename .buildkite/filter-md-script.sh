@@ -13,6 +13,6 @@ then
     echo "Only docs were updated, not running the pr-validation pipeline."
     exit 1
 else
-    echo "Running pr-validation pipeline.""
+    echo "Running pr-validation pipeline."
     exit 0
 fi

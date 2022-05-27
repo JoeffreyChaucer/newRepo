@@ -1,12 +1,18 @@
 steps:
-  - label: '🔨 Check for MD file'
+  - label: '🔨 filter MD file'
     command: .buildkite/filter-md-script.sh
-    key: filter
+    key: filter-pr
     if: build.pull_request.base_branch == "main"
     soft_fail:
       - exit_status: '*'
 
-  - label: ':pipeline:'
-    command: .buildkite/trigger-pr-pipeline-script.sh
-    depends_on: filter
-    allow_dependency_failure: true
+  - label: 'Run pr-validation only if filter check is passed'
+  - command: |
+      if [ $$(buildkite-agent step get "outcome" --step "filter-pr") == "passed" ]; then
+         cat <<- YAML | buildkite-agent pipeline upload
+         steps:
+           - label: "Trigger Pr-pipeline"
+             trigger: "firstproject"
+      YAML
+      fi
+    depends_on: filter-pr
